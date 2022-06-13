@@ -18,7 +18,12 @@ export default function TaskListPage({navigation}) {
 
   return (
     <Page>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={
+          hasTasks
+            ? styles.container
+            : [styles.container, styles.containerCenter]
+        }>
         {!hasTasks && (
           <View style={styles.noTasksWrap}>
             <Text style={styles.noTasks}>No tasks yet</Text>
@@ -49,6 +54,8 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 30,
     paddingBottom: 20,
+  },
+  containerCenter: {
     alignItems: 'center',
   },
   noTasksWrap: {
