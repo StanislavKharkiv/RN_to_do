@@ -9,8 +9,8 @@ function TaskItem({item, deleteTask}) {
   const taskColor =
     PRIORITY_VALUES.find(
       ({value}) =>
-        value.toLocaleLowerCase() === item.priority.toLocaleLowerCase(),
-    )?.color ?? 'white';
+        value.toLocaleLowerCase() === item.priority?.toLocaleLowerCase(),
+    )?.color ?? 'gray';
 
   const onPressDelete = async id => {
     try {
@@ -22,9 +22,8 @@ function TaskItem({item, deleteTask}) {
   };
 
   return (
-    <View style={styles.item}>
+    <View style={[styles.item, {borderLeftColor: taskColor}]}>
       <View style={styles.task}>
-        <View style={[styles.priority, {backgroundColor: taskColor}]} />
         <Text style={styles.title}>{item.title}</Text>
       </View>
       <TouchableHighlight onPress={() => onPressDelete(item.id)}>
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingRight: 6,
     marginVertical: 6,
     marginHorizontal: 10,
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 2},
     backgroundColor: 'white',
+    borderLeftColor: 'red',
+    borderLeftWidth: 5,
     elevation: 4,
   },
   task: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 50,
+    justifyContent: 'center',
     flex: 1,
   },
   title: {
@@ -61,8 +61,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Pacifico-Regular',
   },
   priority: {
-    width: 4,
+    width: 5,
+    minHeight: 50,
     height: '100%',
+    alignSelf: 'stretch',
   },
 });
 

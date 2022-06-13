@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopWidth: 1,
     borderTopColor: 'gray',
+    backgroundColor: 'white',
   },
   link: {
     height: 30,
