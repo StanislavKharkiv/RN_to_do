@@ -11,7 +11,7 @@ import {
 import {routes} from '../../routes';
 
 const ICON_COLOR = '#808080';
-const ICON_COLOR_ACTIVE = '#404040';
+const ICON_COLOR_ACTIVE = '#111111';
 
 const MenuItem = ({icon, route}) => {
   const currentRoute = useRoute();
