@@ -15,6 +15,15 @@ const App = () => {
   const [allTasks, setAllTasks] = useState([]);
   const deleteTask = id => setAllTasks(allTasks.filter(task => task.id !== id));
   const addTask = task => setAllTasks([...allTasks, task]);
+  const patchTask = (id, fields) => {
+    const tasks = [...allTasks];
+    setAllTasks(
+      tasks.map(item => {
+        if (item.id === id) return {...item, ...fields};
+        return item;
+      }),
+    );
+  };
 
   useEffect(() => {
     const importData = async () => {
@@ -31,7 +40,7 @@ const App = () => {
   }, []);
 
   return (
-    <TasksContext.Provider value={{allTasks, deleteTask, addTask}}>
+    <TasksContext.Provider value={{allTasks, deleteTask, addTask, patchTask}}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name={routes.taskList} component={TaskListPage} />
