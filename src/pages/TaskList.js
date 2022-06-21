@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useMemo} from 'react';
 import {
   SafeAreaView,
   FlatList,
@@ -14,7 +14,11 @@ import {routes} from '../routes';
 
 export default function TaskListPage({navigation}) {
   const task = useContext(TasksContext);
-  const hasTasks = task.allTasks.length > 0;
+  const allTasks = useMemo(
+    () => task.allTasks.filter(({archived}) => !archived),
+    [task.allTasks],
+  );
+  const hasTasks = allTasks.length > 0;
 
   return (
     <Page>
@@ -34,7 +38,7 @@ export default function TaskListPage({navigation}) {
           </View>
         )}
         <FlatList
-          data={task.allTasks}
+          data={allTasks}
           renderItem={({item}) => (
             <TaskItem item={item} deleteTask={task.deleteTask} />
           )}

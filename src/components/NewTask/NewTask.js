@@ -30,6 +30,7 @@ export default function NewTask() {
       title: taskText,
       priority: priorityValue,
       done: false,
+      archived: false,
     };
     try {
       await AsyncStorage.setItem(String(task.id), JSON.stringify(task));

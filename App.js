@@ -13,6 +13,7 @@ export const TasksContext = createContext();
 
 const App = () => {
   const [allTasks, setAllTasks] = useState([]);
+  const [currentTask, setCurrentTask] = useState(null); // null or task id
   const deleteTask = id => setAllTasks(allTasks.filter(task => task.id !== id));
   const addTask = task => setAllTasks([...allTasks, task]);
   const patchTask = (id, fields) => {
@@ -40,7 +41,15 @@ const App = () => {
   }, []);
 
   return (
-    <TasksContext.Provider value={{allTasks, deleteTask, addTask, patchTask}}>
+    <TasksContext.Provider
+      value={{
+        allTasks,
+        deleteTask,
+        addTask,
+        patchTask,
+        currentTask,
+        setCurrentTask,
+      }}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name={routes.taskList} component={TaskListPage} />
