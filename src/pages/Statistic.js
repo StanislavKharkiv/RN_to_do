@@ -1,13 +1,36 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import Page from '../components/Page/Page';
-
+import StatisticBar from '../components/StatisticBar/StatisticBar';
+import {useTaskStatistic} from '../hooks';
 export default function StatisticPage() {
+  const {archived, done, uncompleted, all} = useTaskStatistic();
+
   return (
     <Page>
-      <View style={{height: '100%', justifyContent: 'center'}}>
-        <Text style={{textAlign: 'center', fontSize: 32}}>Coming soon...</Text>
-      </View>
+      <StatisticBar
+        title="All closed tasks"
+        color="gray"
+        percent={100}
+        quantity={archived}
+      />
+      <StatisticBar
+        title="In progress"
+        color="gray"
+        percent={(all - archived) * 10}
+        quantity={all - archived}
+      />
+      <StatisticBar
+        title="Complete"
+        color="green"
+        percent={done.percent}
+        quantity={done.quantity}
+      />
+      <StatisticBar
+        title="Uncomplete"
+        color="red"
+        percent={uncompleted.percent}
+        quantity={uncompleted.quantity}
+      />
     </Page>
   );
 }
