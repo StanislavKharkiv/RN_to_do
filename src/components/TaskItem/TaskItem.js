@@ -4,7 +4,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
+  TouchableNativeFeedback,
 } from 'react-native';
 import {PRIORITY_VALUES} from '../../constants/main';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -69,7 +70,7 @@ function TaskItem({item, deleteTask}) {
   };
 
   return (
-    <TouchableHighlight onPress={onPressTask}>
+    <TouchableNativeFeedback onPress={onPressTask}>
       <View style={[styles.item, {borderLeftColor: taskColor}]}>
         <View style={styles.task}>
           <Text style={[styles.title, item.done ? styles.doneTitle : {}]}>
@@ -79,13 +80,13 @@ function TaskItem({item, deleteTask}) {
         {true && (
           <Animated.View style={{...styles.buttonWrapper, right: fadeAnim}}>
             {item.done ? (
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => changeTask({done: false})}
                 style={styles.button}>
                 <FontAwesomeIcon icon={faUndo} color="red" size={ICON_SIZE} />
-              </TouchableHighlight>
+              </TouchableOpacity>
             ) : (
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => changeTask({done: true})}
                 style={styles.button}>
                 <FontAwesomeIcon
@@ -93,31 +94,31 @@ function TaskItem({item, deleteTask}) {
                   color="green"
                   size={ICON_SIZE}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             )}
             {!item.done && (
-              <TouchableHighlight onPress={() => {}} style={styles.button}>
+              <TouchableOpacity onPress={() => {}} style={styles.button}>
                 <FontAwesomeIcon
                   icon={faPen}
                   color="dimgray"
                   size={ICON_SIZE}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             )}
-            <TouchableHighlight onPress={() => changeTask({archived: true})}>
+            <TouchableOpacity onPress={() => changeTask({archived: true})}>
               <FontAwesomeIcon
                 icon={faArchive}
                 color="orange"
                 size={ICON_SIZE}
               />
-            </TouchableHighlight>
-            <TouchableHighlight onPress={onPressDelete} style={styles.button}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onPressDelete} style={styles.button}>
               <FontAwesomeIcon icon={faTrashAlt} color="red" size={ICON_SIZE} />
-            </TouchableHighlight>
+            </TouchableOpacity>
           </Animated.View>
         )}
       </View>
-    </TouchableHighlight>
+    </TouchableNativeFeedback>
   );
 }
 

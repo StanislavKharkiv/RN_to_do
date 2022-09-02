@@ -1,10 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {CountUp} from 'use-count-up';
 
 export default function StatisticBar({percent, quantity, title, color}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{`${title} - ${quantity} tasks`}</Text>
+      <Text style={styles.title}>
+        {title} - <CountUp isCounting end={quantity} duration={3} /> tasks
+      </Text>
       <View style={styles.barWrap}>
         <View
           style={[styles.bar, {width: `${percent}%`, backgroundColor: color}]}
